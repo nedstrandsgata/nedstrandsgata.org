@@ -17,4 +17,4 @@ deploy:
   local-dir: build
   on:
     branch: master
-  fqdn: nedstrandsgata.org # will automagically create CNAME file
+  fqdn: www.nedstrandsgata.org # will automagically create CNAME file
