@@ -101,9 +101,9 @@ gulp.task('js:minify', function() {
 /*
 	Move *.html files in root to build
 */
-gulp.task('html:copy', function() {
+gulp.task('other:copy', function() {
   return gulp.src([
-      './src/*.html'
+      './src/*.*'
     ])
     .pipe(gulp.dest('./build'))
 });
@@ -113,8 +113,10 @@ gulp.task('html:copy', function() {
 */
 gulp.task('images:minify', function() {
   return gulp.src([
-      './src/img/*.jpg',
-      './src/img/*.svg'
+      './src/img/**/*.jpg',
+      './src/img/**/*.svg',
+      './src/img/**/*.png',
+
     ])
     .pipe(gulp.dest('./build/img'))
 });
@@ -138,14 +140,14 @@ gulp.task('browserSync', function() {
 gulp.task('css',  ['css:compile', 'css:minify']);
 gulp.task('js', ['js:minify']);
 gulp.task('images', ['images:minify']);
-gulp.task('html', ['html:copy']);
+gulp.task('other', ['other:copy']);
 
 // define default task
-gulp.task('default', ['css', 'js', 'vendor', 'images', 'html']);
+gulp.task('default', ['css', 'js', 'vendor', 'images', 'other']);
 
 // Dev task
-gulp.task('dev', ['css', 'js',  'images', 'html', 'browserSync'], function() {
+gulp.task('dev', ['css', 'js',  'images', 'other', 'browserSync'], function() {
   gulp.watch('./src/scss/*.scss', ['css']);
   gulp.watch('./src/js/*.js', ['js']);
-  gulp.watch('./src/*.html', browserSync.reload); // TODO Fix this (different folder now)
+  gulp.watch('./src/*.*', browserSync.reload); // TODO Fix this (different folder now)
 });
